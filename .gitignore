@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+*.log
+
+# Virtual environment
+venv/
+.env
+*.env
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+*.ipynb
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Local data
+horror_movies.db
+faiss_indices/
+*.sqlite3
+*.db
+*.zip
+
+# Cache
+.cache/
+*.tmp
+*.bak
+*.swp
+
+# Build & dist
+dist/
+build/
+*.egg
+*.manifest
+*.spec
