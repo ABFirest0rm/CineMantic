@@ -25,13 +25,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Local data
-horror_movies.db
-faiss_indices/
-*.sqlite3
-*.db
-*.zip
-
 # Cache
 .cache/
 *.tmp
