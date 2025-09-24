@@ -10,7 +10,7 @@ Instead of typing exact titles, you can describe a scene, vibe, or fuzzy memory 
 ## ✨ Features
 - 🧠 **Mistral embeddings** for semantic understanding  
 - ⚡ **FAISS vector search** for fast similarity lookups  
-- 🎬 **SQLite movie database** (~2k horror titles, 21 MB)  
+- 🎬 **SQLite movie database** 
 - 🎨 **Streamlit frontend** with responsive UI  
 - Weighted scoring from **plot, overview, keywords, genres**  
 - Token-aware input (fits within model context)  
