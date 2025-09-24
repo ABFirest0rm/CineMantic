@@ -24,18 +24,5 @@ Instead of typing exact titles, you can describe a scene, vibe, or fuzzy memory 
 - **Mistral API** – embeddings + query parsing  
 - **FAISS** – vector similarity  
 - **SQLite** – lightweight movie DB  
-- **Streamlit** – UI + deployment  
-
----
-
-## 📂 Project Structure
-CineMantic/
-│── app.py # Streamlit frontend
-│── search.py # Semantic search pipeline
-│── horror_movies.db # SQLite DB (~21 MB)
-│── faiss_indices/ # Prebuilt FAISS indexes
-│── few_shot_prompt.txt # LLM system prompt
-│── requirements.txt # Dependencies
-│── .env.example # Example environment variables
-│── .gitignore # Ignore venv, .env, db dumps, etc.
+- **Streamlit** – UI + deployment
 
