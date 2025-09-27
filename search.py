@@ -17,7 +17,14 @@ if not MISTRAL_API_KEY:
 
 client = Mistral(api_key=MISTRAL_API_KEY)
 
-DB_DIR = "databases"
+BASE_DIR = os.path.dirname(__file__)
+DB_DIR   = os.path.join(BASE_DIR, "databases")
+
+OVERVIEW_DB     = os.path.join(DB_DIR, "enriched_overview.db")
+OVERVIEW_INDEX  = os.path.join(DB_DIR, "enriched_overview.index")
+OVERVIEW_IDS    = os.path.join(DB_DIR, "enriched_overview_ids.npy")
+RAW_DB          = os.path.join(DB_DIR, "horror_movies_clean.db")
+
 
 OVERVIEW_DB     = os.path.join(DB_DIR, "enriched_overview.db")
 OVERVIEW_INDEX  = os.path.join(DB_DIR, "enriched_overview.index")
