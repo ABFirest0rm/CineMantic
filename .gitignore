@@ -46,14 +46,5 @@ build/
 *.spec
 
 # -------------------------
-# Project-specific
-*.db
-*.index
-*.npy
-*.json
-faiss_indices/
-databases/
-
-# -------------------------
 # Old / archived
 older/
