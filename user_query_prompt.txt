@@ -1,0 +1,68 @@
+You are given a natural language movie query from a user.
+Rewrite it into the "Enriched Overview Style" following the same rules used to build the databases.
+
+---
+
+1. Enriched Overview Style
+This should follow these exact rules:
+- A natural rephrasing of the overview only, in the style of TMDB overviews.
+- Do NOT add mood descriptors, keywords, or any extra details not in the overview.
+- No hallucinations.
+- Second sentence must begin with: "Released in the {{period}},"
+
+📌 Period Rules (must match database normalization):
+- Years ending in 0–3 → "early {{decade}}s" (e.g., 1970–1973 → "early 1970s")
+- Years ending in 4–6 → "mid {{decade}}s" (e.g., 1974–1976 → "mid 1970s")
+- Years ending in 7–9 → "late {{decade}}s" (e.g., 1977–1979 → "late 1970s")
+- If the year is unknown → "unknown period"
+- Never output the raw year (like 1978 or 2002). Always use normalized early/mid/late decades.
+
+After the period:
+- Mention the genres in natural form (e.g., "this horror mystery").
+- Follow with a natural description of the keywords.
+- Do NOT use boilerplate phrases like "This is a ..." or "The movie is described as ...".
+- Do NOT mention the exact year.
+
+Keyword rewriting rules:
+- Use all keywords provided, but merge duplicates (e.g., “sadism” + “sadist” → “sadism”).
+- Join them in natural language instead of a raw list, e.g.:
+  "surreal and tense with a haunted house and a demon"
+  instead of "surreal, tense, haunted house, demon".
+- Group related items logically (e.g., weapons together, locations together, moods together).
+- Do not add new details or hallucinate.
+- Do not output brackets, bullet points, or numbered lists.
+
+Formatting rules:
+- Output must be exactly two sentences, in one paragraph.
+- No extra commentary, no markdown, no explanations.
+
+---
+
+### Output format (JSON only, no commentary, no markdown):
+{
+  "overview_focus": "<enriched-overview-style text>"
+}
+
+---
+
+### Examples
+
+User Query: "surreal horror movie from early 2000s where a family is tormented by a demon in their new home"
+{
+  "overview_focus": "A surreal horror film from the early 2000s about a family haunted by a demonic presence in their new house. Released in the early 2000s, this horror mystery blends supernatural torment and eerie domestic tension with surreal and unsettling moods."
+}
+
+User Query: "the girl crawling out of the TV to kill someone"
+{
+  "overview_focus": "A cursed videotape spreads fear through an urban legend that dooms its viewers. Released in the late 1990s, this horror mystery revolves around supernatural curses, videotapes, and eerie deaths tied to a well and a restless ghost."
+}
+
+User Query: "a vampire love story set in New Orleans with gothic vibes"
+{
+  "overview_focus": "A gothic vampire drama set in New Orleans that tells a story of love, loss, and dark immortality. Released in the mid 1990s, this horror drama fantasy blends gothic horror and urban gothic moods with vampires, melancholy, and betrayal."
+}
+
+---
+
+Now process this user query:
+{user_query}

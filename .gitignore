@@ -1,3 +1,4 @@
+# -------------------------
 # Python
 __pycache__/
 *.py[cod]
@@ -8,32 +9,51 @@ __pycache__/
 .eggs/
 *.log
 
+# -------------------------
 # Virtual environment
 venv/
 .env
 *.env
 
+# -------------------------
 # Jupyter / Colab
 .ipynb_checkpoints/
 *.ipynb
 
+# -------------------------
 # OS junk
 .DS_Store
 Thumbs.db
 
+# -------------------------
 # IDE
 .vscode/
 .idea/
 
-# Cache
+# -------------------------
+# Cache / Temp
 .cache/
 *.tmp
 *.bak
 *.swp
 
+# -------------------------
 # Build & dist
 dist/
 build/
 *.egg
 *.manifest
 *.spec
+
+# -------------------------
+# Project-specific
+*.db
+*.index
+*.npy
+*.json
+faiss_indices/
+databases/
+
+# -------------------------
+# Old / archived
+older/
