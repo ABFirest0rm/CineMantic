@@ -9,7 +9,7 @@ st.set_page_config(page_title="CineMantic 🎬", page_icon="🎬", layout="wide"
 st.markdown(
     """
     <h1 style="text-align:center; margin-bottom:0;">
-        🎬 Cinemantic
+        🎬 CineMantic
     </h1>
     <p style="text-align:center; color:gray; margin-top:4px;">
         Find your next horror experience with semantic search.
@@ -64,17 +64,17 @@ st.markdown(
     """
     <p style="text-align:center; font-size:12px; color:gray; margin-top:40px;">
         This product uses the TMDB API but is not endorsed or certified by TMDB.<br>
-        <img src="docs/tmdb_logo.png" width="80">
+        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" 
              width="80">
     </p>
     """,
     unsafe_allow_html=True,
 )
 
-with st.expander("ℹ️ About Cinemantic"):
+with st.expander("ℹ️ About CineMantic"):
     st.markdown(
         """
-        Cinemantic is an experimental semantic search engine for horror movies.
+        CineMantic is an experimental semantic search engine for horror movies.
         Instead of keyword matching, it understands **plots, themes, and vibes** — letting you search in natural language.
 
         **Current Version:** Alpha build (overview-only search). Database limited to the **Top 500 TMDB horror titles**.
