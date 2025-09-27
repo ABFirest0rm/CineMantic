@@ -4,7 +4,7 @@ import os
 from search import search_movies
 
 load_dotenv()
-st.set_page_config(page_title="Cinemantic 🎬", page_icon="🎬", layout="wide")
+st.set_page_config(page_title="CineMantic 🎬", page_icon="🎬", layout="wide")
 
 st.markdown(
     """
@@ -64,7 +64,7 @@ st.markdown(
     """
     <p style="text-align:center; font-size:12px; color:gray; margin-top:40px;">
         This product uses the TMDB API but is not endorsed or certified by TMDB.<br>
-        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg"
+        <img src="docs/tmdb_logo.png" width="80">
              width="80">
     </p>
     """,
