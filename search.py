@@ -30,10 +30,11 @@ DB_CONN = sqlite3.connect(RAW_DB, check_same_thread=False)
 USER_QUERY_PROMPT = "user_query_prompt.txt"
 PROMPT_PATH = os.path.join(BASE_DIR, USER_QUERY_PROMPT)
 EMBED_MODEL = "mistral-embed"
+LLM = "mistral-small"
 
 
 
-def safe_chat_call(messages, model="mistral-small-latest", retries=5):
+def safe_chat_call(messages, model=LLM, retries=5):
     for attempt in range(retries):
         try:
             return client.chat.complete(model=model, messages=messages)

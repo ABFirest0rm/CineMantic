@@ -6,7 +6,7 @@ import base64
 
 load_dotenv()
 st.set_page_config(page_title="CineMantic 🎬", page_icon="🎬", layout="wide")
-logo_path = os.path.join("assets", "tmdb_logo.svg")
+logo_path = os.path.join("assets", "tmdb_logo.png")
 
 st.markdown(
     """
