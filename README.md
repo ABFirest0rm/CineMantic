@@ -163,3 +163,7 @@ streamlit run app.py
 > ```
 >
 > Use your own API key. Model names or API calls may need small adjustments depending on what’s available to you.
+
+## 📄 License
+
+This project is licensed under the MIT License.
