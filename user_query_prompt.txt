@@ -54,7 +54,7 @@ User Query: "surreal horror movie from early 2000s where a family is tormented b
 
 User Query: "the girl crawling out of the TV to kill someone"
 {
-  "overview_focus": "A cursed videotape spreads fear through an urban legend that dooms its viewers. Released in the late 1990s, this horror mystery revolves around supernatural curses, videotapes, and eerie deaths tied to a well and a restless ghost."
+  "overview_focus": "A supernatural horror story about a girl emerging from a television to kill her victims. Released in the late 1990s, this horror mystery involves cursed media and deadly consequences tied to a haunting presence."
 }
 
 User Query: "a vampire love story set in New Orleans with gothic vibes"

@@ -8,7 +8,7 @@ import numpy as np
 import faiss
 from mistralai import Mistral
 from dotenv import load_dotenv
-
+import atexit
 load_dotenv()
 
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
@@ -24,17 +24,14 @@ OVERVIEW_DB     = os.path.join(DB_DIR, "enriched_overview.db")
 OVERVIEW_INDEX  = os.path.join(DB_DIR, "enriched_overview.index")
 OVERVIEW_IDS    = os.path.join(DB_DIR, "enriched_overview_ids.npy")
 RAW_DB          = os.path.join(DB_DIR, "horror_movies_clean.db")
-
-
-OVERVIEW_DB     = os.path.join(DB_DIR, "enriched_overview.db")
-OVERVIEW_INDEX  = os.path.join(DB_DIR, "enriched_overview.index")
-OVERVIEW_IDS    = os.path.join(DB_DIR, "enriched_overview_ids.npy")
-
-RAW_DB          = os.path.join(DB_DIR, "horror_movies_clean.db")
-
+INDEX = faiss.read_index(OVERVIEW_INDEX)
+IDS   = np.load(OVERVIEW_IDS)
+DB_CONN = sqlite3.connect(RAW_DB, check_same_thread=False)
+USER_QUERY_PROMPT = "user_query_prompt.txt"
+PROMPT_PATH = os.path.join(BASE_DIR, USER_QUERY_PROMPT)
 EMBED_MODEL = "mistral-embed"
 
-USER_QUERY_PROMPT = "user_query_prompt.txt"
+
 
 def safe_chat_call(messages, model="mistral-small-latest", retries=5):
     for attempt in range(retries):
@@ -63,7 +60,7 @@ def _load_index(path):
 
 
 def parse_query_with_llm(user_query: str) -> dict:
-    with open(USER_QUERY_PROMPT, "r", encoding="utf-8") as f:
+    with open(PROMPT_PATH, "r", encoding="utf-8") as f:
         FEW_SHOT_PROMPT = f.read()
 
     result = safe_chat_call(
@@ -86,8 +83,8 @@ def search_index_overview(overview_text, k=10):
     if not overview_text.strip():
         return []
 
-    idx = _load_index(OVERVIEW_INDEX)
-    ids = np.load(OVERVIEW_IDS)
+    idx = INDEX
+    ids = IDS
 
     vec = _embed_text(overview_text)
     if vec is None:
@@ -109,8 +106,7 @@ def search_index_overview(overview_text, k=10):
 def fetch_movies_from_db(movie_ids):
     if not movie_ids:
         return {}
-    conn = sqlite3.connect(RAW_DB)
-    cur = conn.cursor()
+    cur = DB_CONN.cursor()
     qmarks = ",".join("?" * len(movie_ids))
     cur.execute(
         f"""SELECT id, title, overview, runtime, poster, release_date, rating
@@ -118,7 +114,6 @@ def fetch_movies_from_db(movie_ids):
         [int(i) for i in movie_ids]
     )
     rows = cur.fetchall()
-    conn.close()
     return {str(row[0]): row for row in rows}
 
 def search_movies(user_query, k=10):
@@ -128,3 +123,8 @@ def search_movies(user_query, k=10):
     ids = [mid for mid, _ in ranked]
     meta_map = fetch_movies_from_db(ids)
     return ranked, meta_map
+
+def close_db():
+    DB_CONN.close()
+
+atexit.register(close_db)

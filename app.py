@@ -1,10 +1,12 @@
 import streamlit as st
 from dotenv import load_dotenv
-import os
 from search import search_movies
+import os
+import base64
 
 load_dotenv()
 st.set_page_config(page_title="CineMantic 🎬", page_icon="🎬", layout="wide")
+logo_path = os.path.join("assets", "tmdb_logo.svg")
 
 st.markdown(
     """
@@ -57,19 +59,27 @@ if search_clicked:
                     st.subheader(title)
                     st.caption(f"⭐ {rating or '—'} | {runtime or '—'} min | {release_date or '—'}")
                     st.write(overview)
-                    st.write(f"**Score:** {score:.3f}")
+
+                    percent = int(max(0.0, min(score, 1.0)) * 100)
+                    st.caption(f"Match: {percent}%")
+
                 st.markdown("---")
 
+with open(logo_path, "rb") as f:
+    logo_base64 = base64.b64encode(f.read()).decode()
+
 st.markdown(
-    """
-    <p style="text-align:center; font-size:12px; color:gray; margin-top:40px;">
-        This product uses the TMDB API but is not endorsed or certified by TMDB.<br>
-        <img src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_2-d537fb228cf3ded904ef09b136fe3fec72548ebc1fea3fbbd1ad9e36364db38b.svg" 
-             width="80">
-    </p>
+    f"""
+    <div style="text-align:center; margin-top:40px; margin-bottom:40px;">
+        <p style="font-size:12px; color:gray; margin-bottom:12px;">
+            This product uses the TMDB API but is not endorsed or certified by TMDB.
+        </p>
+        <img src="data:image/png;base64,{logo_base64}" width="140">
+    </div>
     """,
     unsafe_allow_html=True,
 )
+
 
 with st.expander("ℹ️ About CineMantic"):
     st.markdown(
@@ -77,6 +87,7 @@ with st.expander("ℹ️ About CineMantic"):
         CineMantic is an experimental semantic search engine for horror movies.
         Instead of keyword matching, it understands **plots, themes, and vibes** — letting you search in natural language.
 
-        **Current Version:** Alpha build (overview-only search). Database limited to the **Top 500 TMDB horror titles**.
+        **Current Version:** Alpha build.  
+        Database currently includes the **Top 500 highest-rated horror titles on TMDB**.
         """
     )
